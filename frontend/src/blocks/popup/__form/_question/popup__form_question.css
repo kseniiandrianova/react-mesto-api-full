@@ -1,0 +1,12 @@
+.popup__form_question {
+    display: flex;
+    flex-direction: column;
+    width: 430px;
+    height: 181px;
+    position: relative;
+    top: calc(50% - 165px);
+    margin: auto auto auto auto;
+    background-color: white;
+    border-radius: 10px;
+
+}

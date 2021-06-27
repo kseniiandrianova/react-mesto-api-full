@@ -1,0 +1,13 @@
+.logo__menu {
+    display: none;
+    
+}
+
+
+@media screen and (max-width: 767px) {
+    .logo__menu {
+        max-width: 103.74px;
+        min-height: 24.4px;
+        
+    } 
+}

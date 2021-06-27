@@ -1,0 +1,7 @@
+.element__box {
+    display: flex;
+    max-width: 246px;
+    margin: 0 auto;
+    justify-content: space-between;
+    text-align: start;
+}

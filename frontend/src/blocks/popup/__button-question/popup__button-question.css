@@ -1,0 +1,30 @@
+.popup__button-question {
+    width: 100%;
+    max-width: 358px;
+    min-height: 50px;
+    background: #000000;
+    border-radius: 2px;
+    border: 0;
+    font-size: 18px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 21.78px;
+    align-items: center;
+    color: #FFFFFF;
+    margin-top: 48px;
+}
+
+.popup__button-question:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+    .popup__button-question {
+        max-width: 238px;
+        min-height: 46px;
+        font-size: 14px;
+        line-height: 16.94px;
+        margin-top: 45px;
+    }
+}
