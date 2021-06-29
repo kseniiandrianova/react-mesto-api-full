@@ -57,6 +57,7 @@ function App() {
 
   React.useEffect(() => {
     handleCheckToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   function handleMenuClick() {

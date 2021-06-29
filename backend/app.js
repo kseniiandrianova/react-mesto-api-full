@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
@@ -6,6 +7,7 @@ const { errors, celebrate, Joi } = require('celebrate');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+
 const routerUsers = require('./routes/users');
 const routerCards = require('./routes/cards');
 const { login, createUser } = require('./controllers/users');
@@ -17,7 +19,7 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors({ origin: true }));
+
 app.use(cookieParser());
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -29,6 +31,28 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useCreateIndex: true,
   useFindAndModify: false,
   useUnifiedTopology: true,
+});
+
+const options = {
+  origin: [
+    'http://localhost:3000',
+    'https://api.kseniiamesto.students.nomoredomains.monster',
+    'https://kseniiamesto.students.nomoredomains.monster',
+    'https://api.kseniiamesto.students.nomoredomains.monster/users/me',
+  ],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
+  credentials: true,
+};
+
+app.use('*', cors(options));
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
 });
 
 app.post('/signin', celebrate({
