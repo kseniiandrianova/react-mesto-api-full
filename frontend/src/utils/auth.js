@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://api.kseniiamesto.students.nomoredomains.monster/';
+export const BASE_URL = 'https://auth.nomoreparties.co';
 
  function handleResponse(res) {
   if (!res.ok ) {
@@ -20,10 +20,9 @@ export const register = (data) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    credentials: "include",
     body: JSON.stringify({
-      email: data.email,
-      password: data.password
+      password: data.password,
+      email: data.email  
       
      }),
   })
@@ -34,10 +33,9 @@ export const authorize = ( data ) => {
   return fetch(`${BASE_URL}/signin`, {
     headers,
     method: 'POST',
-    credentials: "include",
-    body: JSON.stringify({
-      email: data.email,
+    body: JSON.stringify({ 
       password: data.password,
+      email: data.email 
     }),
   })
     .then(res => handleResponse(res))
@@ -50,8 +48,7 @@ export const getContent = (token) => {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
-    },
-    credentials: "include",
+    }
   })
   .then(res => handleResponse(res))
   .then(data => data)

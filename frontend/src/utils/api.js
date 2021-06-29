@@ -11,24 +11,18 @@ export default class Api {
     return res.json();
 }
 
-  getInitalCards(token){
+  getInitalCards(){
       return fetch(`${this._url}cards`, {
           method: "GET",
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
+          headers: this._headers
         })
         .then(this._handleResponse)
   }
 
-  addCard({name, link}, token) {
+  addCard({name, link}) {
     return fetch(`${this._url}cards`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: name,
         link: link
@@ -38,47 +32,35 @@ export default class Api {
   }
 
   
-  deleteCard(cardId, token){
+  deleteCard(cardId){
     return fetch(`${this._url}cards/${cardId}`, {
         method: "DELETE",
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
+        headers: this._headers,
     })
     .then(this._handleResponse)
   }
 
 
-  addLike(cardId, token) {
+  addLike(cardId) {
     return fetch(`${this._url}cards/likes/${cardId}`, {
         method: "PUT",
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
+        headers: this._headers
     })
     .then(this._handleResponse)
   }
 
-  deleteLike(cardId, token) {
+  deleteLike(cardId) {
     return fetch(`${this._url}cards/likes/${cardId}`, {
         method: "DELETE",
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
+        headers: this._headers
     })
     .then(this._handleResponse)
   }
 
-  getProfileInfo(token) {
+  getProfileInfo() {
     return fetch(`${this._url}users/me`, {
         method: "GET",
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
+        headers: this._headers
       })
       .then(this._handleResponse)
   }
@@ -87,13 +69,10 @@ export default class Api {
     return Promise.all([this.getProfileInfo(), this.getInitialCards()]);
   }
 
-  saveProfileInfo({name, description}, token) {
+  saveProfileInfo({name, description}) {
     return fetch(`${this._url}users/me`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: name,
         about: description
@@ -102,13 +81,10 @@ export default class Api {
     .then(this._handleResponse)
   }
 
-  saveAvatar({avatar}, token) {
+  saveAvatar({avatar}) {
     return fetch(`${this._url}users/me/avatar`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
+      headers: this._headers,
       body: JSON.stringify({
       avatar: avatar
       })
@@ -119,5 +95,11 @@ export default class Api {
 }
 
  export const api = new Api({
-  url:"https://api.kseniiamesto.students.nomoredomains.monster/",
+  url:"https://kseniiamesto.students.nomoredomains.monster",
+  headers: {
+    Accept: "application/json",
+    authorization: `Bearer ${localStorage.getItem('jwt')}`,
+    "Content-Type": "application/json",
+
+  }
 });

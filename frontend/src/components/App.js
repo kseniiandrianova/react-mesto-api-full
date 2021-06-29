@@ -51,7 +51,6 @@ function App() {
           setCards(cardData);
          })
           .catch((err) => {
-              console.log(err)
           })
   }, [])
 
