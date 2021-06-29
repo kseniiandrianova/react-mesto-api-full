@@ -22,8 +22,8 @@ export const register = (data) => {
     },
     credentials: "include",
     body: JSON.stringify({
-      password: data.password,
-      email: data.email  
+      email: data.email,
+      password: data.password
       
      }),
   })
@@ -35,9 +35,9 @@ export const authorize = ( data ) => {
     headers,
     method: 'POST',
     credentials: "include",
-    body: JSON.stringify({ 
+    body: JSON.stringify({
+      email: data.email,
       password: data.password,
-      email: data.email 
     }),
   })
     .then(res => handleResponse(res))

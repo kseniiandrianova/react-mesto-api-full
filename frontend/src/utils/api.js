@@ -11,23 +11,23 @@ export default class Api {
     return res.json();
 }
 
-  getInitalCards(){
+  getInitalCards(token){
       return fetch(`${this._url}cards`, {
           method: "GET",
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+            'Authorization': `Bearer ${token}`
           },
         })
         .then(this._handleResponse)
   }
 
-  addCard({name, link}) {
+  addCard({name, link}, token) {
     return fetch(`${this._url}cards`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({
         name: name,
@@ -38,46 +38,46 @@ export default class Api {
   }
 
   
-  deleteCard(cardId){
+  deleteCard(cardId, token){
     return fetch(`${this._url}cards/${cardId}`, {
         method: "DELETE",
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+          'Authorization': `Bearer ${token}`
         },
     })
     .then(this._handleResponse)
   }
 
 
-  addLike(cardId) {
+  addLike(cardId, token) {
     return fetch(`${this._url}cards/likes/${cardId}`, {
         method: "PUT",
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+          'Authorization': `Bearer ${token}`
         },
     })
     .then(this._handleResponse)
   }
 
-  deleteLike(cardId) {
+  deleteLike(cardId, token) {
     return fetch(`${this._url}cards/likes/${cardId}`, {
         method: "DELETE",
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+          'Authorization': `Bearer ${token}`
         },
     })
     .then(this._handleResponse)
   }
 
-  getProfileInfo() {
+  getProfileInfo(token) {
     return fetch(`${this._url}users/me`, {
         method: "GET",
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+          'Authorization': `Bearer ${token}`
         },
       })
       .then(this._handleResponse)
@@ -87,12 +87,12 @@ export default class Api {
     return Promise.all([this.getProfileInfo(), this.getInitialCards()]);
   }
 
-  saveProfileInfo({name, description}) {
+  saveProfileInfo({name, description}, token) {
     return fetch(`${this._url}users/me`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({
         name: name,
@@ -102,12 +102,12 @@ export default class Api {
     .then(this._handleResponse)
   }
 
-  saveAvatar({avatar}) {
+  saveAvatar({avatar}, token) {
     return fetch(`${this._url}users/me/avatar`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({
       avatar: avatar
