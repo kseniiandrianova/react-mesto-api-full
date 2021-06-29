@@ -34,22 +34,32 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 
 });
 
-const whiteList = ['http://localhost:3001',
+const whiteList = [
   'https://kseniiamesto.students.nomoredomains.monster',
-  'https://kseniiamesto.students.nomoredomains.monster/users',
-  'https://kseniiamesto.students.nomoredomains.monster/users/me',
+  'https://www.kseniiamesto.students.nomoredomains.monster',
+  'http://kseniiamesto.students.nomoredomains.monster',
+  'http://localhost:3001',
+  'http://localhost:3000',
 ];
 
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (whiteList.indexOf(origin) !== -1) {
-      callback(null, true);
-    }
-  },
-  credentials: true,
+const options = {
+  origin: whiteList,
+  optionsSuccessStatus: 200,
 };
 
-app.use(cors(corsOptions));
+app.use(cors(options));
+
+app.use((req, res, next) => {
+  const { origin } = req.headers;
+
+  if (whiteList.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+  }
+
+  next();
+});
 
 app.get('/crash-test', () => {
   setTimeout(() => {
