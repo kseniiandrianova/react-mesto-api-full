@@ -41,7 +41,10 @@ const options = {
     'https://api.oladuwki.nomoredomains.club/users/me',
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
   allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
+  credentials: true,
 };
 
 app.use(cors(options));
