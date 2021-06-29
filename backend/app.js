@@ -29,25 +29,27 @@ app.use(requestLogger);
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
   useCreateIndex: true,
+  useUnifiedTopology: true,
   useFindAndModify: false,
 
 });
 
-const options = {
-  origin: [
-    'http://localhost:3000',
-    'https://api.oladuwki.nomoredomains.club',
-    'https://oladuwki.nomoredomains.club',
-    'https://api.oladuwki.nomoredomains.club/users/me',
-  ],
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-  allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
+const whiteList = ['http://localhost:3001',
+  'https://kseniiamesto.students.nomoredomains.monster',
+  'https://kseniiamesto.students.nomoredomains.monster/users',
+  'https://kseniiamesto.students.nomoredomains.monster/users/me',
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (whiteList.indexOf(origin) !== -1) {
+      callback(null, true);
+    }
+  },
   credentials: true,
 };
 
-app.use(cors(options));
+app.use(cors(corsOptions));
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -79,7 +81,7 @@ app.use(routerCards);
 app.use(errorLogger);
 app.use(errors());
 
-app.use('/', (req, res, next) => {
+app.all('*', (req, res, next) => {
   const err = new NotFoundError('Запрашиваемый ресурс не найден');
   next(err);
 });
