@@ -1,12 +1,12 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const { errors, celebrate, Joi } = require('celebrate');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const cors = require('cors');
 
 const routerUsers = require('./routes/users');
 const routerCards = require('./routes/cards');
@@ -30,24 +30,21 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
-  useUnifiedTopology: true,
+
 });
 
 const options = {
   origin: [
     'http://localhost:3000',
-    'https://api.kseniiamesto.students.nomoredomains.monster',
-    'https://kseniiamesto.students.nomoredomains.monster',
-    'https://api.kseniiamesto.students.nomoredomains.monster/users/me',
+    'https://api.oladuwki.nomoredomains.club',
+    'https://oladuwki.nomoredomains.club',
+    'https://api.oladuwki.nomoredomains.club/users/me',
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
   allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
-  credentials: true,
 };
 
-app.use('*', cors(options));
+app.use(cors(options));
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -79,7 +76,7 @@ app.use(routerCards);
 app.use(errorLogger);
 app.use(errors());
 
-app.use('*', (req, res, next) => {
+app.use('/', (req, res, next) => {
   const err = new NotFoundError('Запрашиваемый ресурс не найден');
   next(err);
 });

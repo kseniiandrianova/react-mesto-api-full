@@ -20,6 +20,7 @@ export const register = (data) => {
     headers: {
       'Content-Type': 'application/json'
     },
+    credentials: "include",
     body: JSON.stringify({
       password: data.password,
       email: data.email  
@@ -33,6 +34,7 @@ export const authorize = ( data ) => {
   return fetch(`${BASE_URL}/signin`, {
     headers,
     method: 'POST',
+    credentials: "include",
     body: JSON.stringify({ 
       password: data.password,
       email: data.email 
@@ -48,7 +50,8 @@ export const getContent = (token) => {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
-    }
+    },
+    credentials: "include",
   })
   .then(res => handleResponse(res))
   .then(data => data)
