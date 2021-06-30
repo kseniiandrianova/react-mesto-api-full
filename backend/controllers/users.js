@@ -1,30 +1,20 @@
 const { NODE_ENV, JWT_SECRET } = process.env;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const users = require('../models/user');
-
+const User = require('../models/user');
 const NotFoundError = require('../errors/NotFoundError');
 const ConflictError = require('../errors/ConflictError');
 const BadRequestError = require('../errors/BadRequestError');
 
 module.exports.getUsers = (req, res, next) => {
-  users.find({})
-    .then((items) => {
-      res.status(200).send({ data: items });
-    })
-    .catch((err) => {
-      if (err.message === 'NotValidId') {
-        next(new NotFoundError('Нет пользователя с таким id'));
-      }
-      if (err.kind === 'ObjectId') {
-        next(new BadRequestError('Переданы некорректный данные'));
-      }
-      next(err);
-    });
+  User.find({})
+    .then((users) => res.status(200).send(users))
+    .catch(next);
 };
-module.exports.getUser = (req, res, next) => {
+
+module.exports.getUserMe = (req, res, next) => {
   const { _id } = req.user;
-  return users.findOne({ _id })
+  return User.findOne({ _id })
     .then((user) => {
       if (!user) {
         throw new NotFoundError('Нет пользователя с таким id');
@@ -32,10 +22,7 @@ module.exports.getUser = (req, res, next) => {
       res.status(200).send(user);
     })
     .catch((err) => {
-      if (err.message === 'NotValidId') {
-        next(new NotFoundError('Нет пользователя с таким id'));
-      }
-      if (err.kind === 'ObjectId') {
+      if (err.name === 'ValidationError') {
         next(new BadRequestError('Переданы некорректный данные'));
       }
       next(err);
@@ -43,7 +30,7 @@ module.exports.getUser = (req, res, next) => {
 };
 
 module.exports.getUserId = (req, res, next) => {
-  users.findById(req.params.id)
+  User.findById(req.params.id)
     .orFail(new Error('NotValidId'))
     .then((user) => res.status(200).send(user))
     .catch((err) => {
@@ -58,28 +45,29 @@ module.exports.getUserId = (req, res, next) => {
 };
 
 module.exports.createUser = (req, res, next) => {
-  const {
-    name,
-    about,
-    avatar,
-    email,
-    password,
-  } = req.body;
+  // eslint-disable-next-line object-curly-newline
+  const { name, about, avatar, email, password } = req.body;
   bcrypt.hash(password, 10).then((hash) => {
-    users.create({
+    User.create({
       name,
       about,
       avatar,
       email,
       password: hash,
     })
-      .then((user) => res.status(200).send({
-        _id: user._id,
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        email: user.email,
-      }))
+      .then(
+        (user) =>
+          // eslint-disable-next-line implicit-arrow-linebreak
+          res.status(200).send({
+            _id: user._id,
+            name: user.name,
+            about: user.about,
+            avatar: user.avatar,
+            email: user.email,
+            // eslint-disable-next-line comma-dangle
+          })
+        // eslint-disable-next-line function-paren-newline
+      )
       .catch((err) => {
         if (err.name === 'ValidationError') {
           next(new BadRequestError('Переданы некорректный данные'));
@@ -91,11 +79,16 @@ module.exports.createUser = (req, res, next) => {
   });
 };
 
-module.exports.updateProfile = (req, res, next) => {
+module.exports.updateUser = (req, res, next) => {
   const { name, about } = req.body;
-  const owner = req.user._id;
-  users.findByIdAndUpdate(owner, { name, about }, { runValidators: true, new: true })
-    .then((user) => res.status(200).send({ data: user }))
+  User.findByIdAndUpdate(
+    req.user._id,
+    { name, about },
+    // eslint-disable-next-line comma-dangle
+    { runValidators: true, new: true }
+  )
+    .orFail(new Error('NotValidId'))
+    .then((user) => res.status(200).send(user))
     .catch((err) => {
       if (err.message === 'NotValidId') {
         next(new NotFoundError('Нет пользователя с таким id'));
@@ -109,9 +102,14 @@ module.exports.updateProfile = (req, res, next) => {
 
 module.exports.updateAvatar = (req, res, next) => {
   const { avatar } = req.body;
-  const owner = req.user._id;
-  users.findByIdAndUpdate(owner, { avatar }, { runValidators: true, new: true })
-    .then((user) => res.status(200).send({ data: user }))
+  User.findByIdAndUpdate(
+    req.user._id,
+    { avatar },
+    // eslint-disable-next-line comma-dangle
+    { runValidators: true, new: true }
+  )
+    .orFail(new Error('NotValidId'))
+    .then((user) => res.status(200).send(user))
     .catch((err) => {
       if (err.message === 'NotValidId') {
         next(new NotFoundError('Нет пользователя с таким id'));
@@ -123,31 +121,9 @@ module.exports.updateAvatar = (req, res, next) => {
     });
 };
 
-// module.exports.login = (req, res, next) => {
-//   const { email, password } = req.body;
-//   return users.findUserByCredentials(email, password)
-//     .then((user) => {
-//       res.cookie(
-//         'jwt',
-//         {
-//           token: jwt.sign({ _id: user._id },
-//         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', {
-//             expiresIn: '7d',
-//           }),
-//         },
-//         {
-//           maxAge: 3600000 * 24 * 7,
-//           httpOnly: true,
-//           samesire: true,
-//         },
-//       )
-//         .send(user);
-//     })
-//     .catch(next);
-// };
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
-  return users.findUserByCredentials(email, password)
+  return User.findUserByCredentials(email, password)
     .then((user) => {
       res.send({
         token: jwt.sign(
