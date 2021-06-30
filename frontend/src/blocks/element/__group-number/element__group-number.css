@@ -1,0 +1,15 @@
+.element__group-number{
+  padding: 0%;
+  font-family: 'Inter', ‘Arial’, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 13px;
+  line-height: 16px;
+  max-width: 10px;
+  color: #000000;
+  margin: auto;
+  padding-top: 3px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}

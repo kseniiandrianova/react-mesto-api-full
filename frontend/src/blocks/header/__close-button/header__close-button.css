@@ -1,0 +1,19 @@
+@media screen and (max-width: 768px) {
+  .header__close-button {
+    border: none;
+    cursor: pointer;
+    padding: 0%;
+    margin: 0%;
+    margin-right: 15px;
+    justify-content: center;
+    align-items: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+
+.header__close-button:hover {
+  opacity: 0.6;
+  transition: opacity 0.5s linear;
+}

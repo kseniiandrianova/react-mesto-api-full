@@ -1,0 +1,33 @@
+.header__state{
+  font-family: 'Inter', ‘Arial’, sans-serif;
+  max-width: 114px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0%;
+  padding: 0;
+  padding-bottom: 46px;
+  text-decoration: none;
+  /* identical to box height, or 122% */
+  
+  text-align: right;
+  
+  color: #FFFFFF;
+}
+
+@media screen and (max-width: 768px) {
+  .header__state {
+    margin-top: 30px;
+    max-width: 114px;
+    height: 24.4px;
+    margin-right: 30px;
+    margin-bottom: 33px;
+    padding: 0%;
+  }
+}
+
+.header__state:hover {
+  opacity: 0.6;
+  transition: opacity 0.5s linear;
+}

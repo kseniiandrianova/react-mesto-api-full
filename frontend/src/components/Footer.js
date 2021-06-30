@@ -1,7 +1,11 @@
-export default function Footer() {
-    return (
-        <footer className="footer">
-                <p className="footer__autor">©2020 Mesto Russia</p>
-            </footer>
-    )
+import '../index.css';
+
+function Footer() {
+  return (
+    <footer className="footer">
+      <h2 className="footer__title">© 2020 Mesto Russia</h2>
+    </footer>
+  );
 }
+
+export default Footer;

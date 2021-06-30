@@ -1,14 +1,5 @@
 .element {
-    display: flex;
-    flex-direction: column;
-    max-width: 282px;
-    width: 100%;
-    background-color: #FFFFFF;
-    border-radius: 10px 10px 10px 10px; 
-}
-
-@media screen and (max-width: 767px) {
-    .element {
-        margin: 0 auto;
-    } 
+  background-color: #ffffff;
+  border-radius: 10px;
+  width: 100%;
 }

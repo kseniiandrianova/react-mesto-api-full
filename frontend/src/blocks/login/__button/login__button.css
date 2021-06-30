@@ -1,0 +1,34 @@
+.login__button {
+  width: 358px;
+  border: 0;
+  border-radius: 2px;
+  background-color: #FFFFFF;
+  height: 50px;
+  font-family: 'Inter', ‘Arial’, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  cursor: pointer;
+  color: #000000;
+  padding: 0%;
+  margin-top: 216px;
+}
+
+.login__button:hover {
+  opacity: 0.8;
+  transition: opacity 0.5s linear;
+}
+
+@media screen and (min-width: 320px) and (max-width: 425px) {
+  .login__button {
+    width: 84.4%;
+    margin-top: 173px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 17px;
+    margin-left: 22px;
+    margin-right: 22px;
+  }
+}

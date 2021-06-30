@@ -1,0 +1,24 @@
+.register__subtitle{
+
+width: 358px;
+height: 17px;
+
+font-family: 'Inter', ‘Arial’, sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 17px;
+/* identical to box height */
+
+text-align: center;
+
+color: #FFFFFF;
+}
+
+@media screen and (max-width: 768px) {
+  .register__subtitle {
+    
+    margin: 0%;
+    padding: 0%;
+  }
+}

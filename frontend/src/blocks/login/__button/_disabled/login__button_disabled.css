@@ -1,0 +1,7 @@
+.login__button_disabled {
+  color:#000000;
+  background-color: #E5E5E5;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 2px;
+}

@@ -1,0 +1,20 @@
+.element__group {
+  width: 22px;
+  height: 19px;
+  border: none;
+  cursor: pointer;
+  padding: 0%;
+  background: #ffffff;
+  align-items: center;
+  justify-content: center;
+  background-image: url(../../../images/like.svg);
+  background-repeat: no-repeat;
+  overflow: hidden;
+  object-fit: cover;
+  margin: auto;
+}
+
+.element__group:hover {
+  opacity: 0.5;
+  transition: opacity 0.5s linear;
+}

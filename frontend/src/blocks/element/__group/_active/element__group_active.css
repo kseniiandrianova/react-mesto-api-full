@@ -1,0 +1,6 @@
+.element__group_active {
+  outline: none;
+  opacity: 1;
+  background-image: url(../../../../images/likeactv.svg);
+  background-repeat: no-repeat;
+}

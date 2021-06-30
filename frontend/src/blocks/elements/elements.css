@@ -1,26 +1,37 @@
 .elements {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px 17px;
-    max-width: 880px;
-    width: 100%;
-    margin: 47px auto 0;
-    overflow: hidden;
+  margin: auto;
+  margin-top: 51px;
+  max-width: 68.75%;
+  display: grid;
+  grid-template-columns: repeat(3, 32%);
+  gap: 17px;
 }
 
-@media screen and (max-width: 1023px) {
-    .elements {
-        
-        max-width: 660px;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 50px 40px;
-        
-    }
+@media screen and (max-width: 1024px) {
+  .elements {
+    margin: 51px 7.5% 0 7.5%;
+    max-width: 85%;
+    display: grid;
+    gap: 17px;
+  } 
 }
-@media screen and (max-width: 767px) {
-    .elements {
-        
-        grid-template-columns: 1fr;
-        
-    }
+
+@media screen and (max-width: 768px) {
+  .elements {
+    width: 90%;
+    margin: auto;
+    margin-top: 36px;
+    grid-template-columns: repeat(2, 48.5%);
+    gap: 17px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .elements {
+    margin: auto;
+    margin-top: 36px;
+    width: 88.125%;
+    grid-template-columns: 100%;
+    gap: 20px;
+  }
 }

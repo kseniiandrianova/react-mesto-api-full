@@ -1,0 +1,35 @@
+.login__input {
+  font-family: 'Inter', ‘Arial’, sans-serif;
+  width: 358px;
+  height: 27px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  margin: auto;
+  margin-bottom: 30px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 0%;
+  opacity: 1;
+  border-bottom: 1px solid #CCCCCC;
+  
+}
+
+@media screen and (max-width: 768px) {
+  .login__input {
+    font-size: 14px;
+    line-height: 17px;
+    margin: 0 auto 30px auto;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 425px) {
+  .login__input {
+    max-width: 84.4%;
+    font-size: 14px;
+    line-height: 17px;
+    margin: 0% 22px 30px 22px;
+  }
+}
