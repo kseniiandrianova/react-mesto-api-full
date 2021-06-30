@@ -34,22 +34,26 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 
 });
 
+const whiteList = [
+  'https://kseniiamesto.students.nomoredomains.monster',
+  'https://kseniiamesto.students.nomoredomains.monster/users/me',
+  'https://api.kseniiamesto.students.nomoredomains.monster',
+  'https://www.kseniiamesto.students.nomoredomains.monster',
+  'http://kseniiamesto.students.nomoredomains.monster',
+  'http://localhost:3001',
+  'http://localhost:3000',
+];
+
 const options = {
-  origin: [
-    'https://kseniiamesto.students.nomoredomains.monster',
-    'https://www.kseniiamesto.students.nomoredomains.monster',
-    'https://api.kseniiamesto.students.nomoredomains.monster/users/me',
-    'https://api.kseniiamesto.students.nomoredomains.monster',
-    'http://localhost:3001',
-    'http://localhost:3000',
-  ],
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-  allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
+  origin: (origin, callback) => {
+    if (whiteList.indexOf(origin) !== -1) {
+      callback(null, true);
+    }
+  },
   credentials: true,
 };
-app.use('*', cors(options));
+
+app.use(cors(options));
 
 app.get('/crash-test', () => {
   setTimeout(() => {
