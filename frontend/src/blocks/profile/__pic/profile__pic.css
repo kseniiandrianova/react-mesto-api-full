@@ -1,0 +1,21 @@
+.profile__pic {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    margin-left: 0;
+    border-radius: 100px;
+    max-width: 120px;
+    min-height: 120px;
+    object-fit: cover;
+}
+
+.profile__pic:hover {
+    opacity: 0.3;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+    .profile__pic {
+        margin: 0 auto;
+    } 
+}

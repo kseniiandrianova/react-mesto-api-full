@@ -1,6 +1,7 @@
 export default class Api {
-  constructor({ address }) {
-    this._address = address;
+  constructor(config) {
+      this._url = config.url;
+      this._headers = config.headers;
   }
 
   _handleResponse(res) {
@@ -8,26 +9,20 @@ export default class Api {
         return Promise.reject(console.log(`Что-то пошло не так. Ошибка ${res.status}`));
     }
     return res.json();
-  }
+}
 
   getInitalCards(){
-      return fetch(`${this._address}cards`, {
+      return fetch(`${this._url}cards`, {
           method: "GET",
-          headers: {
-            authorization: `Bearer ${localStorage.getItem('jwt')}`,
-            "Content-Type": "application/json",
-          },
+          headers: this._headers
         })
         .then(this._handleResponse)
   }
 
   addCard({name, link}) {
-    return fetch(`${this._address}cards`, {
+    return fetch(`${this._url}cards`, {
       method: 'POST',
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('jwt')}`,
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: name,
         link: link
@@ -38,45 +33,34 @@ export default class Api {
 
   
   deleteCard(cardId){
-    return fetch(`${this._address}cards/${cardId}`, {
+    return fetch(`${this._url}cards/${cardId}`, {
         method: "DELETE",
-        headers: {
-          authorization: `Bearer ${localStorage.getItem('jwt')}`,
-          "Content-Type": "application/json",
-        },
+        headers: this._headers,
     })
     .then(this._handleResponse)
   }
 
-  putLikes(cardId) {
-    return fetch(`${this._address}cards/likes/${cardId}`, {
+
+  addLike(cardId) {
+    return fetch(`${this._url}cards/likes/${cardId}`, {
         method: "PUT",
-        headers: {
-          authorization: `Bearer ${localStorage.getItem('jwt')}`,
-          "Content-Type": "application/json",
-        },
+        headers: this._headers
     })
     .then(this._handleResponse)
   }
 
-  deleteLikes(cardId) {
-    return fetch(`${this._address}cards/likes/${cardId}`, {
+  deleteLike(cardId) {
+    return fetch(`${this._url}cards/likes/${cardId}`, {
         method: "DELETE",
-        headers: {
-          authorization: `Bearer ${localStorage.getItem('jwt')}`,
-          "Content-Type": "application/json",
-        },
+        headers: this._headers
     })
     .then(this._handleResponse)
   }
 
   getProfileInfo() {
-    return fetch(`${this._address}users/me`, {
+    return fetch(`${this._url}users/me`, {
         method: "GET",
-        headers: {
-          authorization: `Bearer ${localStorage.getItem('jwt')}`,
-          "Content-Type": "application/json",
-        },
+        headers: this._headers
       })
       .then(this._handleResponse)
   }
@@ -86,12 +70,9 @@ export default class Api {
   }
 
   saveProfileInfo({name, description}) {
-    return fetch(`${this._address}users/me`, {
+    return fetch(`${this._url}users/me`, {
       method: 'PATCH',
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('jwt')}`,
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: name,
         about: description
@@ -101,12 +82,9 @@ export default class Api {
   }
 
   saveAvatar({avatar}) {
-    return fetch(`${this._address}users/me/avatar`, {
+    return fetch(`${this._url}users/me/avatar`, {
       method: 'PATCH',
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('jwt')}`,
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
       avatar: avatar
       })
@@ -116,9 +94,12 @@ export default class Api {
 
 }
 
-const config = {
-  address: "http://localhost:3000/",
-};
-
-export const api = new Api(config);
-
+ export const api = new Api({
+  url:"http://localhost:3000/",
+  headers: {
+    Accept: "application/json",
+    authorization: `Bearer ${localStorage.getItem('token')}`,
+    "Content-Type": "application/json",
+    credentials: 'include',
+  }
+});

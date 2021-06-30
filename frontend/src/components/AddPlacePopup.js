@@ -22,10 +22,11 @@ export default function AddPlacePopap (props) {
         onClose={props.onClose} 
         onSubmit={handleAddPlaceSubmit}>
     
-        <input  ref={nameRef} type="text" id="input-place" className="popup__input popup__input_value_place" name="name" required minLength="2" maxLength="30" placeholder="Название" />
-        <span className="popup__span input-place-error"></span>
-        <input ref={linkRef} type="url" id="input-link" className="popup__input popup__input_value_link" name="link" required placeholder="Ссылка на картинку" />
-        <span className="popup__span input-link-error"></span>   
+                <input  ref={nameRef} id="card-name" type="text" placeholder="Название" className="popup__input popup__input_name-card" name="card-name" minLength="2"
+                maxLength="30" required />
+                <span className="error" id="card-name-error"></span>
+                <input  ref={linkRef} id="card-picture" type="url" placeholder="Ссылка на картинку" className="popup__input popup__input_link" name="card-link" required />
+                <span className="error" id="card-error"></span>
         
     </PopupWithForm>
     )

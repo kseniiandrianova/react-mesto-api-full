@@ -1,22 +1,16 @@
 .header__email{
-  
-  height: 22px;
-
-  font-family: 'Inter', ‘Arial’, sans-serif;
+  margin-top: 18px;;
+  font-family: Inter;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 18px;
   line-height: 22px;
-/* identical to box height, or 122% */
-  margin: 0%;
-  padding: 0%;
-  text-align: right;
-
-color: #FFFFFF;
-}
-
-@media screen and (max-width: 768px) {
-  .header__email {
-    display: none;
+  list-style-type: none;
   }
-}
+  
+  @media screen and (max-width: 768px) {
+    .header__email {
+      margin-top: 40px;
+      
+    }
+  }

@@ -1,0 +1,21 @@
+.popup__image {
+    vertical-align: top;
+    object-fit: contain;
+    max-width: 75vw;
+    max-height: 75vh;
+}
+
+@media screen and (max-width: 1023px) {
+  .popup__image {
+    max-width: 80%;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .popup__image {
+    max-width: 90%;
+    max-height: 80%;
+    margin: auto;
+  }
+}

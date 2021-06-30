@@ -1,0 +1,12 @@
+.element__counter {
+	font-weight: 400;
+    font-size: 13px;
+    line-height: 15px;
+    margin-left: 7px;
+    margin-top: 5px;
+    font-style: normal;
+    color: #000;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

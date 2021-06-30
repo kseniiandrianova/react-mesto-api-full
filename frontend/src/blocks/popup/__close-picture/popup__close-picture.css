@@ -1,0 +1,19 @@
+.popup__close-picture {
+  position: absolute;
+  top: 35px;
+  right: -45px;
+}
+
+@media screen and (max-width: 1023px) {
+  .popup__close-picture {
+    top: 30px;
+    right: 5px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .popup__close-picture {
+    top: 34px;
+    right: 12px;
+  }
+}
