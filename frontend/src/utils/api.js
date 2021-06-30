@@ -95,7 +95,7 @@ export default class Api {
 }
 
  export const api = new Api({
-  url:"https://localhost:3001/",
+  url:"https://api.kseniiamesto.students.nomoredomains.monsterhost/",
   headers: {
     Accept: "application/json",
     authorization: `Bearer ${localStorage.getItem('jwt')}`,
