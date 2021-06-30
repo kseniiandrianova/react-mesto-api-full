@@ -44,12 +44,13 @@ export const authorize = ( data ) => {
 
 export const getContent = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     }
   })
-  .then(res => handleResponse(res))
-  .then(data => data)
-}
+    .then((response) => handleResponse(response))
+    .then((data) => data);
+};

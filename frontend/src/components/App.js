@@ -41,19 +41,21 @@ function App() {
     const history = useHistory();
 
     React.useEffect( () => {
-      Promise.all([
+      if (loggedIn) {
+        Promise.all([
           api.getInitalCards(),
           api.getProfileInfo()
       ])
-         .then((result ) => {
-          const [cardData, userData] = result;
-          setCurrentUser(userData);
-          setCards(cardData);
-         })
-          .catch((err) => {
-              console.log(err)
-          })
-  }, [])
+      .then(([cardData, userData] ) => {
+        setCurrentUser(userData);
+        setCards(cardData);
+       })
+        .catch((err) => {
+            console.log(err)
+        })
+     }
+   }, [loggedIn]);
+  
 
   React.useEffect(() => {
     handleCheckToken();
@@ -207,10 +209,6 @@ function App() {
         });
     }
 
-    
-
-    
-    
     const handleSignOut = () => {
       localStorage.removeItem('jwt')
       setLoggedIn(false)

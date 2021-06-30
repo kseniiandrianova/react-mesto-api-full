@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const helmet = require('helmet');
 const cors = require('cors');
+const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const { errors, celebrate, Joi } = require('celebrate');
 const path = require('path');
@@ -30,20 +30,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useUnifiedTopology: true,
 });
 
-const whiteList = [
-  'http://localhost:3000',
-];
-
-const options = {
-  origin: (origin, callback) => {
-    if (whiteList.indexOf(origin) !== -1) {
-      callback(null, true);
-    }
-  },
-  credentials: true,
-};
-
-app.use(cors(options));
+app.use(cors());
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
