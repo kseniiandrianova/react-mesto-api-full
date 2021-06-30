@@ -1,4 +1,3 @@
-const { NODE_ENV, JWT_SECRET } = process.env;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const users = require('../models/user');
@@ -123,40 +122,17 @@ module.exports.updateAvatar = (req, res, next) => {
     });
 };
 
-// module.exports.login = (req, res, next) => {
-//   const { email, password } = req.body;
-//   return users.findUserByCredentials(email, password)
-//     .then((user) => {
-//       res.cookie(
-//         'jwt',
-//         {
-//           token: jwt.sign({ _id: user._id },
-//         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', {
-//             expiresIn: '7d',
-//           }),
-//         },
-//         {
-//           maxAge: 3600000 * 24 * 7,
-//           httpOnly: true,
-//           samesire: true,
-//         },
-//       )
-//         .send(user);
-//     })
-//     .catch(next);
-// };
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   return users.findUserByCredentials(email, password)
     .then((user) => {
-      res.send({
-        token: jwt.sign(
-          { _id: user._id, email: user.email },
-          NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-          // eslint-disable-next-line comma-dangle
-          { expiresIn: '7d' }
-        ),
-      });
+      const token = jwt.sign({ _id: user._id }, 'secret-key', { expiresIn: '7d' });
+      res.cookie('jwt', token, {
+        httpOnly: true,
+        sameSite: true,
+        maxAge: 3600000 * 24 * 7,
+      }).send({ token });
+      next();
     })
     .catch(next);
 };

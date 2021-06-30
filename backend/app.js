@@ -1,9 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const { errors, celebrate, Joi } = require('celebrate');
-const cors = require('cors');
+const path = require('path');
 const cookieParser = require('cookie-parser');
 
 const routerUsers = require('./routes/users');
@@ -14,6 +15,8 @@ const NotFoundError = require('./errors/NotFoundError');
 
 const { PORT = 3000 } = process.env;
 const app = express();
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cookieParser());
 app.use(helmet());
@@ -28,11 +31,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 
 const whiteList = [
-  'https://kseniiamesto.students.nomoredomains.monster',
-  'https://kseniiamesto.students.nomoredomains.monster/users/me',
-  'https://api.kseniiamesto.students.nomoredomains.monster',
-  'https://www.kseniiamesto.students.nomoredomains.monster',
-  'http://kseniiamesto.students.nomoredomains.monster',
+  'http://localhost:3000',
 ];
 
 const options = {
@@ -84,6 +83,7 @@ app.use((err, req, res, next) => {
 });
 
 app.disable('x-powered-by');
+
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log('сервер запущен');
