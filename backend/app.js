@@ -43,23 +43,15 @@ const whiteList = [
 ];
 
 const options = {
-  origin: whiteList,
-  optionsSuccessStatus: 200,
+  origin: (origin, callback) => {
+    if (whiteList.indexOf(origin) !== -1) {
+      callback(null, true);
+    }
+  },
+  credentials: true,
 };
 
 app.use(cors(options));
-
-app.use((req, res, next) => {
-  const { origin } = req.headers;
-
-  if (whiteList.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-  }
-
-  next();
-});
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -91,7 +83,7 @@ app.use(routerCards);
 app.use(errorLogger);
 app.use(errors());
 
-app.all('*', (req, res, next) => {
+app.all('/', (req, res, next) => {
   const err = new NotFoundError('Запрашиваемый ресурс не найден');
   next(err);
 });

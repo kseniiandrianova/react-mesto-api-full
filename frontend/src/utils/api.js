@@ -12,7 +12,7 @@ export default class Api {
 }
 
   getInitalCards(){
-      return fetch(`${this._url}cards`, {
+      return fetch(`${this._url}/cards`, {
           method: "GET",
           headers: this._headers
         })
@@ -20,7 +20,7 @@ export default class Api {
   }
 
   addCard({name, link}) {
-    return fetch(`${this._url}cards`, {
+    return fetch(`${this._url}/cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
@@ -33,7 +33,7 @@ export default class Api {
 
   
   deleteCard(cardId){
-    return fetch(`${this._url}cards/${cardId}`, {
+    return fetch(`${this._url}/cards/${cardId}`, {
         method: "DELETE",
         headers: this._headers,
     })
@@ -42,7 +42,7 @@ export default class Api {
 
 
   addLike(cardId) {
-    return fetch(`${this._url}cards/likes/${cardId}`, {
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
         method: "PUT",
         headers: this._headers
     })
@@ -50,7 +50,7 @@ export default class Api {
   }
 
   deleteLike(cardId) {
-    return fetch(`${this._url}cards/likes/${cardId}`, {
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
         method: "DELETE",
         headers: this._headers
     })
@@ -58,7 +58,7 @@ export default class Api {
   }
 
   getProfileInfo() {
-    return fetch(`${this._url}users/me`, {
+    return fetch(`${this._url}/users/me`, {
         method: "GET",
         headers: this._headers
       })
@@ -70,7 +70,7 @@ export default class Api {
   }
 
   saveProfileInfo({name, description}) {
-    return fetch(`${this._url}users/me`, {
+    return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -82,7 +82,7 @@ export default class Api {
   }
 
   saveAvatar({avatar}) {
-    return fetch(`${this._url}users/me/avatar`, {
+    return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -100,6 +100,6 @@ export default class Api {
     Accept: "application/json",
     authorization: `Bearer ${localStorage.getItem('jwt')}`,
     "Content-Type": "application/json",
-
+    credentials: 'include',
   }
 });
