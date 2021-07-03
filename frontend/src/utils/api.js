@@ -21,8 +21,8 @@ export default class Api {
             headers: {
               'Content-Type': 'application/json',
               "Authorization": `Bearer ${localStorage.getItem('jwt')}`,
-              credentials: 'include',
             },
+            credentials: 'include',
           })
           .then(this._handleResponse)
           
@@ -35,8 +35,8 @@ export default class Api {
           headers: {
             'Content-Type': 'application/json',
             "Authorization": `Bearer ${localStorage.getItem('jwt')}`,
-            credentials: 'include',
           },
+          credentials: 'include',
         })
         .then(this._handleResponse)
     }
@@ -48,8 +48,8 @@ export default class Api {
         headers: {
           'Content-Type': 'application/json',
           'authorization': `Bearer ${localStorage.getItem('jwt')}`,
-          credentials: 'include',
         },
+        credentials: 'include',
         body: JSON.stringify({
           name: name,
           link: link
@@ -65,8 +65,8 @@ export default class Api {
           headers: {
             'Content-Type': 'application/json',
             'authorization': `Bearer ${localStorage.getItem('jwt')}`,
-            credentials: 'include',
           },
+          credentials: 'include',
       })
       .then(this._handleResponse)
     }
@@ -78,8 +78,8 @@ export default class Api {
           headers: {
             'Content-Type': 'application/json',
             'authorization': `Bearer ${localStorage.getItem('jwt')}`,
-            credentials: 'include',
           },
+          credentials: 'include',
       })
       .then(this._handleResponse)
     }
@@ -90,8 +90,8 @@ export default class Api {
           headers: {
             'Content-Type': 'application/json',
             'authorization': `Bearer ${localStorage.getItem('jwt')}`,
-            credentials: 'include',
           },
+          credentials: 'include',
       })
       .then(this._handleResponse)
     }
@@ -102,8 +102,8 @@ export default class Api {
         headers: {
           'Content-Type': 'application/json',
           'authorization': `Bearer ${localStorage.getItem('jwt')}`,
-          credentials: 'include',
         },
+        credentials: 'include',
         body: JSON.stringify({
           name: name,
           about: description
@@ -118,8 +118,8 @@ export default class Api {
         headers: {
           'Content-Type': 'application/json',
           'authorization': `Bearer ${localStorage.getItem('jwt')}`,
-          credentials: 'include',
         },
+        credentials: 'include',
         body: JSON.stringify({
         avatar: avatar
         })

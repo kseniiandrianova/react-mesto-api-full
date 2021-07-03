@@ -12,18 +12,16 @@ export const BASE_URL = 'https://api.kseniiamesto.students.nomoredomains.monster
 const headers = {
   'Accept': 'application/json',
   'Content-Type': 'application/json',
-  credentials: 'include',
 };
 
 
 export const register = (data) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
-      credentials: 'include',
     },
-    credentials: 'include',
     body: JSON.stringify({
       password: data.password,
       email: data.email  
@@ -37,6 +35,7 @@ export const authorize = ( data ) => {
   return fetch(`${BASE_URL}/signin`, {
     headers,
     method: 'POST',
+    credentials: 'include',
     body: JSON.stringify({ 
       password: data.password,
       email: data.email 
@@ -54,7 +53,6 @@ export const getContent = (token) => {
         Accept: "application/json",
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`,
-        credentials: 'include',
       }
     })
       .then((response) => handleResponse(response))
