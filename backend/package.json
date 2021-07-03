@@ -10,7 +10,7 @@
     "build": "react-scripts build",
     "dev": "nodemon app.js"
   },
-  "homepage": "https://github.com//express-mesto/",
+  "homepage": "https://github.com/kseniiandrianova/express-mesto/",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
@@ -33,11 +33,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oladuwki/express-mesto.git"
+    "url": "git+https://github.com/kseniiandrianova/express-mesto.git"
   },
   "keywords": [],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/oladuwki/express-mesto/issues"
+    "url": "https://github.com/kseniiandrianova/express-mesto/issues"
   }
 }

@@ -172,7 +172,7 @@ function App() {
             setInitialData({
               email
            });
-            history.push('/');
+            history.push('/main');
           }
             
           })
@@ -210,7 +210,7 @@ function App() {
             
           });
           handleCheckToken();
-          history.push('/');
+          history.push('/main');
         })
         .catch((err) => {
           console.log(err);
@@ -238,7 +238,7 @@ function App() {
             isMenuCloseIcon={isMenuCloseIcon ? 'header_opened' : 'header_closed'}
             />
             <Switch>
-            <ProtectedRoute exact path="/"
+            <ProtectedRoute exact path="/main"
         component = {Main}
         loggedIn = {loggedIn}
         cards = {cards}
@@ -256,7 +256,7 @@ function App() {
             <Login  onSubmit={handleLogSubmit} />
           </Route>
           <Route path="/">
-                {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
+                {loggedIn ? <Redirect to="/main" /> : <Redirect to="/signin" />}
               </Route>
         </Switch>
         
