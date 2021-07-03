@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://api.kseniiamesto.students.nomoredomains.monster';
+export const BASE_URL = 'https://api.kseniiamesto.students.nomoredomains.monster/';
 
  function handleResponse(res) {
   if (!res.ok ) {
@@ -16,7 +16,7 @@ const headers = {
 
 
 export const register = (data) => {
-  return fetch(`${BASE_URL}/signup`, {
+  return fetch(`${BASE_URL}signup`, {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -32,7 +32,7 @@ export const register = (data) => {
 };
 
 export const authorize = ( data ) => {
-  return fetch(`${BASE_URL}/signin`, {
+  return fetch(`${BASE_URL}signin`, {
     headers,
     method: 'POST',
     credentials: 'include',
@@ -47,7 +47,7 @@ export const authorize = ( data ) => {
 
 export const getContent = (token) => {
   console.log(token);
-    return fetch(`${BASE_URL}/users/me`, {
+    return fetch(`${BASE_URL}users/me`, {
       method: "GET",
       credentials: 'include',
       headers: {
