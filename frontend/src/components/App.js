@@ -44,23 +44,28 @@ function App() {
       if (loggedIn) {
         Promise.all([
           api.getInitalCards(),
-          api.getProfileInfo()
+          api.getProfileInfo(),
       ])
-      .then(([cardData, userData] ) => {
+      .then((result ) => {
+        const [cardData, userData] = result;
+        console.log(result);
+        cardData.reverse();
         setCurrentUser(userData);
         setCards(cardData);
+        
        })
         .catch((err) => {
             console.log(err)
         })
      }
+     // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [loggedIn]);
-  
 
-  React.useEffect(() => {
+   React.useEffect(() => {
     handleCheckToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+  
 
   function handleMenuClick() {
     setMenuOpened(true);
@@ -157,7 +162,7 @@ function App() {
     }
     const handleCheckToken = () => {
       const jwt = localStorage.getItem('jwt');
-      if (jwt) {
+      if (!jwt) {
         auth.getContent(jwt)
         .then((res) => {
           if(res) {
@@ -170,11 +175,13 @@ function App() {
           }
             
           })
-        .catch((err) => {
-          console.log(err);
-        });
+          .catch((err) => {
+            console.log(err);
+          });
       }
     }
+
+
 
     const handleRegSubmit = ( email, password ) => {
       return auth.register(email, password)

@@ -1,7 +1,6 @@
 export default class Api {
     constructor(config) {
         this._url = config.url;
-        this._headers = config.headers;
     }
   
     _handleResponse(res) {
@@ -11,6 +10,9 @@ export default class Api {
       return res.json();
   }
 
+  getInitialData() {
+    return Promise.all([this.getProfileInfo(), this.getInitialCards()]);
+  }
  
   
     getInitalCards(){
@@ -18,32 +20,32 @@ export default class Api {
             method: "GET",
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+              "Authorization": `Bearer ${localStorage.getItem('jwt')}`,
             },
           })
           .then(this._handleResponse)
+          
     }
+    
 
     getProfileInfo() {
       return fetch(`${this._url}users/me`, {
           method: "GET",
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+            "Authorization": `Bearer ${localStorage.getItem('jwt')}`,
           },
         })
         .then(this._handleResponse)
     }
     
-    getInitialData() {
-      return Promise.all([this.getProfileInfo(), this.getInitialCards()]);
-    }
+    
     addCard({name, link}) {
       return fetch(`${this._url}cards`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+          'authorization': `Bearer ${localStorage.getItem('jwt')}`,
         },
         body: JSON.stringify({
           name: name,
@@ -59,7 +61,7 @@ export default class Api {
           method: "DELETE",
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+            'authorization': `Bearer ${localStorage.getItem('jwt')}`,
           },
       })
       .then(this._handleResponse)
@@ -71,7 +73,7 @@ export default class Api {
           method: "PUT",
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+            'authorization': `Bearer ${localStorage.getItem('jwt')}`,
           },
       })
       .then(this._handleResponse)
@@ -82,7 +84,7 @@ export default class Api {
           method: "DELETE",
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+            'authorization': `Bearer ${localStorage.getItem('jwt')}`,
           },
       })
       .then(this._handleResponse)
@@ -93,7 +95,7 @@ export default class Api {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+          'authorization': `Bearer ${localStorage.getItem('jwt')}`,
         },
         body: JSON.stringify({
           name: name,
@@ -108,7 +110,7 @@ export default class Api {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+          'authorization': `Bearer ${localStorage.getItem('jwt')}`,
         },
         body: JSON.stringify({
         avatar: avatar
