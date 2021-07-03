@@ -19,7 +19,14 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useUnifiedTopology: true,
 });
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'https://kseniiamesto.students.nomoredomains.monster',
+    'http://kseniiamesto.students.nomoredomains.monster',
+    'http://localhost:3000',
+  ],
+  credentials: true,
+}));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
