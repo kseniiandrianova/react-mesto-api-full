@@ -19,20 +19,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useUnifiedTopology: true,
 });
 
-const options = {
-  origin: [
-    'http://localhost:3000',
-    'https://api.kseniiamesto.students.nomoredomains.monster',
-    'https://kseniiamesto.students.nomoredomains.monster',
-    'https://api.kseniiamesto.students.nomoredomains.monster/users/me',
-  ],
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-  allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
-  credentials: true,
-};
-app.use('*', cors(options));
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

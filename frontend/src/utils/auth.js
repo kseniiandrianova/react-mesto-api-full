@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://api.kseniiamesto.students.nomoredomains.monster';
+export const BASE_URL = 'http://localhost:3000';
 
  function handleResponse(res) {
   if (!res.ok ) {
@@ -12,6 +12,7 @@ export const BASE_URL = 'https://api.kseniiamesto.students.nomoredomains.monster
 const headers = {
   'Accept': 'application/json',
   'Content-Type': 'application/json',
+  credentials: 'include',
 };
 
 
@@ -19,8 +20,10 @@ export const register = (data) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      credentials: 'include',
     },
+    credentials: 'include',
     body: JSON.stringify({
       password: data.password,
       email: data.email  
@@ -46,10 +49,12 @@ export const authorize = ( data ) => {
 export const getContent = (token) => {
     return fetch(`${BASE_URL}/users/me`, {
       method: "GET",
+      credentials: 'include',
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`,
+        credentials: 'include',
       }
     })
       .then((response) => handleResponse(response))
