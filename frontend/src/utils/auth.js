@@ -18,7 +18,6 @@ const headers = {
 export const register = (data) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
-    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -35,7 +34,6 @@ export const authorize = ( data ) => {
   return fetch(`${BASE_URL}/signin`, {
     headers,
     method: 'POST',
-    credentials: 'include',
     body: JSON.stringify({ 
       password: data.password,
       email: data.email 
@@ -49,12 +47,12 @@ export const getContent = (token) => {
   console.log(token);
     return fetch(`${BASE_URL}/users/me`, {
       method: "GET",
-      credentials: 'include',
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`,
-      }
+      },
+      credentials: "include",
     })
       .then((response) => handleResponse(response))
       .then((data) => data);

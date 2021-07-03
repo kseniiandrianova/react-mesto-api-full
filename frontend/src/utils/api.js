@@ -22,7 +22,6 @@ export default class Api {
               'Content-Type': 'application/json',
               "Authorization": `Bearer ${localStorage.getItem('jwt')}`,
             },
-            credentials: 'include',
           })
           .then(this._handleResponse)
           
@@ -36,7 +35,6 @@ export default class Api {
             'Content-Type': 'application/json',
             "Authorization": `Bearer ${localStorage.getItem('jwt')}`,
           },
-          credentials: 'include',
         })
         .then(this._handleResponse)
     }
@@ -49,7 +47,6 @@ export default class Api {
           'Content-Type': 'application/json',
           'authorization': `Bearer ${localStorage.getItem('jwt')}`,
         },
-        credentials: 'include',
         body: JSON.stringify({
           name: name,
           link: link
@@ -66,7 +63,6 @@ export default class Api {
             'Content-Type': 'application/json',
             'authorization': `Bearer ${localStorage.getItem('jwt')}`,
           },
-          credentials: 'include',
       })
       .then(this._handleResponse)
     }
@@ -79,7 +75,6 @@ export default class Api {
             'Content-Type': 'application/json',
             'authorization': `Bearer ${localStorage.getItem('jwt')}`,
           },
-          credentials: 'include',
       })
       .then(this._handleResponse)
     }
@@ -91,7 +86,6 @@ export default class Api {
             'Content-Type': 'application/json',
             'authorization': `Bearer ${localStorage.getItem('jwt')}`,
           },
-          credentials: 'include',
       })
       .then(this._handleResponse)
     }
@@ -103,7 +97,6 @@ export default class Api {
           'Content-Type': 'application/json',
           'authorization': `Bearer ${localStorage.getItem('jwt')}`,
         },
-        credentials: 'include',
         body: JSON.stringify({
           name: name,
           about: description
@@ -119,7 +112,6 @@ export default class Api {
           'Content-Type': 'application/json',
           'authorization': `Bearer ${localStorage.getItem('jwt')}`,
         },
-        credentials: 'include',
         body: JSON.stringify({
         avatar: avatar
         })
