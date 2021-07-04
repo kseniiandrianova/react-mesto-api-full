@@ -242,7 +242,7 @@ function App() {
             <Switch>
             <ProtectedRoute exact path="/"
         component = {Main}
-        loggedIn = {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
+        loggedIn = {loggedIn}
         cards = {cards}
         onEditAvatar={handleEditAvatarClick} 
         onEditProfile={handleEditProfileClick}  
@@ -257,7 +257,10 @@ function App() {
           <Route path="/signin">
             <Login  onSubmit={handleLogSubmit} />
           </Route>
-         
+          <ProtectedRoute exact path="/"
+        
+        loggedIn = {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
+        />
         </Switch>
         
             <EditProfilePopup 
