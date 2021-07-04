@@ -155,28 +155,6 @@ function App() {
         console.log(err)
       })
     }
-    // const handleCheckToken = () => {
-    //   const jwt = localStorage.getItem('jwt');
-    //   if (!jwt) {
-    //     auth.getContent(jwt)
-    //     .then((res) => {
-    //       if(res) {
-    //         const email = res.data.email;
-    //         setInitialData({
-    //           email
-    //        });
-    //         setLoggedIn(true);
-    //         history.push('/');
-    //       }
-            
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-    //   }
-    // }
-
-
 
     const handleRegSubmit = ( email, password ) => {
       return auth.register(email, password)
@@ -197,15 +175,14 @@ function App() {
 
     const handleLogSubmit = ( {email, password}) => {
       return auth.authorize({email, password})
-      .then((res) => {
-        localStorage.setItem('jwt', res.token);
+      .then(() => {
+        
           setLoggedIn(true);
           setInitialData({
              email,
              password
             
           });
-          
           history.push('/');
         })
         .catch((err) => {
