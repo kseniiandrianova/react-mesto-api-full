@@ -52,6 +52,7 @@ function App() {
         setCurrentUser(userData);
         setCards(cardData);
         setLoggedIn(true);
+        history.push('/');
        })
         .catch((err) => {
             console.log(err)
