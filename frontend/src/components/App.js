@@ -256,7 +256,7 @@ function App() {
           <Route path="/signin">
             <Login  onSubmit={handleLogSubmit} />
           </Route>
-          <Route>
+          <Route path="/main">
                 {loggedIn ? <Redirect to="/main" /> : <Redirect to="/signin" />}
               </Route>
         </Switch>
