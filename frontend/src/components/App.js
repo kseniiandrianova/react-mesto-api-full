@@ -241,7 +241,7 @@ function App() {
             <Switch>
             <ProtectedRoute exact path="/main"
         component = {Main}
-        loggedIn = {loggedIn ? <Redirect to="/main" /> : <Redirect to="/signin" />}
+        loggedIn = {loggedIn ? <Redirect to="/" /> : <Redirect to="/main" />}
         cards = {cards}
         onEditAvatar={handleEditAvatarClick} 
         onEditProfile={handleEditProfileClick}  
