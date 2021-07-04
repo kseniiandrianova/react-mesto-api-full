@@ -46,16 +46,19 @@ function App() {
           api.getProfileInfo()
       ])
          .then((result ) => {
-          const [cardData, userData] = result;
-          setCurrentUser(userData);
-          setCards(cardData);
-          setLoggedIn(true);
-          history.push('/');
+           if (loggedIn) {
+            const [cardData, userData] = result;
+            setCurrentUser(userData);
+            setCards(cardData);
+            setLoggedIn(true);
+            history.push('/');
+           }
+          
          })
           .catch((err) => {
               console.log(err)
           })
-  }, [history])
+  }, [history, loggedIn])
 
   //   React.useEffect( () => {
   //     if (loggedIn) {
