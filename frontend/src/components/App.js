@@ -40,57 +40,7 @@ function App() {
 
     const history = useHistory();
 
-  //   React.useEffect( () => {
-      
-  //       Promise.all([
-  //         api.getInitalCards(),
-  //         api.getProfileInfo(),
-  //     ])
-  //     .then((result ) => {
-  //       const [cardData, userData] = result;
-  //       console.log(result);
-  //       cardData.reverse();
-  //       setCurrentUser(userData);
-  //       setCards(cardData);
-       
-  //      })
-  //       .catch((err) => {
-  //           console.log(err)
-  //       })
-     
-  //    // eslint-disable-next-line react-hooks/exhaustive-deps
-  //  }, []);
-
-  //  React.useEffect(() => {
-  //   handleCheckToken();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [])
-
-  React.useEffect(() => {
-    if (localStorage.getItem('jwt')) {
-      const token =localStorage.getItem('jwt');
-      auth.getContent(token)
-        .then((res) => {
-          if(res) {
-            const email = res.data.email;
-            setInitialData({
-              email
-           });
-            setLoggedIn(true);
-            history.push('/');
-          }
-            
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-
-    }
-    handleCheckToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedIn, history])
-
-  React.useEffect( () => {
+    React.useEffect( () => {
       if (loggedIn) {
         Promise.all([
           api.getInitalCards(),
@@ -102,14 +52,19 @@ function App() {
         cardData.reverse();
         setCurrentUser(userData);
         setCards(cardData);
-       
+        handleCheckToken();
        })
         .catch((err) => {
             console.log(err)
         })
-      }
- // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [loggedIn]);
+     }
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [loggedIn]);
+
+   React.useEffect(() => {
+    handleCheckToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   
 
