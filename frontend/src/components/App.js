@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, useHistory, Redirect} from 'react-router-dom';
+import { Switch, Route, useHistory} from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
 import Header from './Header';
@@ -40,8 +40,58 @@ function App() {
 
     const history = useHistory();
 
-    React.useEffect( () => {
+  //   React.useEffect( () => {
       
+  //       Promise.all([
+  //         api.getInitalCards(),
+  //         api.getProfileInfo(),
+  //     ])
+  //     .then((result ) => {
+  //       const [cardData, userData] = result;
+  //       console.log(result);
+  //       cardData.reverse();
+  //       setCurrentUser(userData);
+  //       setCards(cardData);
+       
+  //      })
+  //       .catch((err) => {
+  //           console.log(err)
+  //       })
+     
+  //    // eslint-disable-next-line react-hooks/exhaustive-deps
+  //  }, []);
+
+  //  React.useEffect(() => {
+  //   handleCheckToken();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [])
+
+  React.useEffect(() => {
+    if (localStorage.getItem('jwt')) {
+      const token =localStorage.getItem('jwt');
+      auth.getContent(token)
+        .then((res) => {
+          if(res) {
+            const email = res.data.email;
+            setInitialData({
+              email
+           });
+            setLoggedIn(true);
+            history.push('/');
+          }
+            
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+    }
+    handleCheckToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn, history])
+
+  React.useEffect( () => {
+      if (loggedIn) {
         Promise.all([
           api.getInitalCards(),
           api.getProfileInfo(),
@@ -57,14 +107,9 @@ function App() {
         .catch((err) => {
             console.log(err)
         })
-     
-     // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, []);
-
-   React.useEffect(() => {
-    handleCheckToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+      }
+ // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [loggedIn]);
 
   
 
@@ -257,9 +302,6 @@ function App() {
           <Route path="/signin">
             <Login  onSubmit={handleLogSubmit} />
           </Route>
-          <Route>
-                {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
-              </Route>
         </Switch>
         
             <EditProfilePopup 
