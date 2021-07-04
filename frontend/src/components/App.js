@@ -239,7 +239,7 @@ function App() {
             isMenuCloseIcon={isMenuCloseIcon ? 'header_opened' : 'header_closed'}
             />
             <Switch>
-            <ProtectedRoute exact path="/main"
+            <ProtectedRoute exact path="/"
         component = {Main}
         loggedIn = {loggedIn}
         cards = {cards}
@@ -257,7 +257,7 @@ function App() {
             <Login  onSubmit={handleLogSubmit} />
           </Route>
           <Route path="*">
-                {loggedIn ? <Redirect to="/main" /> : <Redirect to="/signin" />}
+                {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
               </Route>
         </Switch>
         
