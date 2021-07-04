@@ -8,7 +8,7 @@ export default function Header({ onSignOut, email, isOpen, onMenu, isMenuIcon, i
     return (
             <Switch>
                 
-                <Route exact path="/main">
+                <Route exact path="/">
                 <div className={`header__popup ${isOpen}`}>
                     <p className="header__email">{email}</p>
                 <Link to="/signin" className="header__link" onClick={onSignOut}>Выйти</Link>
