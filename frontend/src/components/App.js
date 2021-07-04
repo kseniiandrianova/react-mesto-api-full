@@ -41,25 +41,42 @@ function App() {
     const history = useHistory();
 
     React.useEffect( () => {
-      if (loggedIn) {
-        Promise.all([
+      Promise.all([
           api.getInitalCards(),
-          api.getProfileInfo(),
+          api.getProfileInfo()
       ])
-      .then((result ) => {
-        const [cardData, userData] = result;
-        cardData.reverse();
-        setCurrentUser(userData);
-        setCards(cardData);
-        setLoggedIn(true);
-        history.push('/');
-       })
-        .catch((err) => {
-            console.log(err)
-        })
-     }
-     // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [loggedIn]);
+         .then((result ) => {
+          const [cardData, userData] = result;
+          setCurrentUser(userData);
+          setCards(cardData);
+          setLoggedIn(true);
+          history.push('/');
+         })
+          .catch((err) => {
+              console.log(err)
+          })
+  }, [history])
+
+  //   React.useEffect( () => {
+  //     if (loggedIn) {
+  //       Promise.all([
+  //         api.getInitalCards(),
+  //         api.getProfileInfo(),
+  //     ])
+  //     .then((result ) => {
+  //       const [cardData, userData] = result;
+  //       cardData.reverse();
+  //       setCurrentUser(userData);
+  //       setCards(cardData);
+  //       setLoggedIn(true);
+  //       history.push('/');
+  //      })
+  //       .catch((err) => {
+  //           console.log(err)
+  //       })
+  //    }
+  //    // eslint-disable-next-line react-hooks/exhaustive-deps
+  //  }, [loggedIn]);
 
   
 
