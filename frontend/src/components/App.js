@@ -42,10 +42,7 @@ function App() {
 
     React.useEffect(() => {
       if(loggedIn){
-        Promise.all([
-          api.getInitalCards(),
-          api.getProfileInfo()
-      ])
+       api.getInitalCards()
         .then((cardData) => {
            setCards(cardData);
         })
@@ -53,7 +50,7 @@ function App() {
     }, [loggedIn]);
     React.useEffect(() => {
      api.getProfileInfo()
-        .then(userData => {
+        .then((userData) => {
           setCurrentUser(userData);
           setLoggedIn(true);
           history.push('/');
