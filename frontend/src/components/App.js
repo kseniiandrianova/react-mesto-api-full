@@ -52,7 +52,6 @@ function App() {
         cardData.reverse();
         setCurrentUser(userData);
         setCards(cardData);
-        
        })
         .catch((err) => {
             console.log(err)
@@ -61,6 +60,7 @@ function App() {
      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [loggedIn]);
 
+  
 
   function handleMenuClick() {
     setMenuOpened(true);
@@ -199,14 +199,17 @@ function App() {
       return auth.authorize({email, password})
       .then((res) => {
         if(res) {
+          localStorage.setItem('jwt', res.token);
           setLoggedIn(true);
           setInitialData({
              email,
              password
             
           });
-           history.push('/');
-              }
+          handleCheckToken();
+          history.push('/');
+        }
+       
         })
         .catch((err) => {
           console.log(err);
