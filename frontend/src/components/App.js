@@ -44,9 +44,8 @@ function App() {
       if(loggedIn){
        // запрос за карточками
        api.getInitalCards()
-        .then((result) => {
+        .then((cardData) => {
            // установили стейт с ними
-           const [cardData] = result;
            setCards(cardData);
         })
       }
@@ -54,8 +53,7 @@ function App() {
     React.useEffect(() => {
      // запрос за профилем
      api.getProfileInfo()
-        .then(result => {
-          const [userData] = result;
+        .then(userData => {
           setCurrentUser(userData);
           setLoggedIn(true);
           // установили стейт, что залогинились
