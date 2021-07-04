@@ -257,10 +257,9 @@ function App() {
           <Route path="/signin">
             <Login  onSubmit={handleLogSubmit} />
           </Route>
-          <ProtectedRoute exact path="/"
-        
-        loggedIn = {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
-        />
+          <Route>
+                {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
+              </Route>
         </Switch>
         
             <EditProfilePopup 
