@@ -48,10 +48,10 @@ function App() {
       ])
       .then((result ) => {
         const [cardData, userData] = result;
-        console.log(result);
         cardData.reverse();
         setCurrentUser(userData);
         setCards(cardData);
+        setLoggedIn(true);
        })
         .catch((err) => {
             console.log(err)
@@ -178,6 +178,7 @@ function App() {
       .then((res) => {
         if(res) {
           history.push('/');
+          localStorage.setItem('jwt', res.token);
           setLoggedIn(true);
           setInitialData({
              email,
