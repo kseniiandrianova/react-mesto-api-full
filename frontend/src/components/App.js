@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, useHistory, Redirect} from 'react-router-dom';
+import { Switch, Route, useHistory} from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
 import Header from './Header';
@@ -256,9 +256,6 @@ function App() {
           <Route path="/signin">
             <Login  onSubmit={handleLogSubmit} />
           </Route>
-          <Route path="/">
-                {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
-              </Route>
         </Switch>
         
             <EditProfilePopup 
