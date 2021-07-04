@@ -239,7 +239,7 @@ function App() {
             isMenuCloseIcon={isMenuCloseIcon ? 'header_opened' : 'header_closed'}
             />
             <Switch>
-            <ProtectedRoute exact path="/"
+            <ProtectedRoute exact path="/main"
         component = {Main}
         loggedIn = {loggedIn}
         cards = {cards}
