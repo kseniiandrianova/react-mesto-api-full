@@ -40,26 +40,52 @@ function App() {
 
     const history = useHistory();
 
-    React.useEffect( () => {
-        Promise.all([
-          api.getInitalCards(),
-          api.getProfileInfo()
-      ])
-         .then((result ) => {
-            const [cardData, userData] = result;
-            setCurrentUser(userData);
-            setCards(cardData);
-            if (loggedIn) {
-              setLoggedIn(true);
-              history.push('/');
-            }
+    React.useEffect(() => {
+      if(loggedIn){
+       // запрос за карточками
+       api.getInitalCards()
+        .then((result) => {
+           // установили стейт с ними
+           const [cardData] = result;
+           setCards(cardData);
+        })
+      }
+    }, [loggedIn]);
+    React.useEffect(() => {
+     // запрос за профилем
+     api.getProfileInfo()
+        .then(result => {
+          const [userData] = result;
+          setCurrentUser(userData);
+          setLoggedIn(true);
+          // установили стейт, что залогинились
+          // установили прочие данные
+          // и ушли на главную
+          history.push('/');
+        })
+    }, [history, loggedIn]);
+
+  //   React.useEffect( () => {
+  //       Promise.all([
+  //         api.getInitalCards(),
+  //         api.getProfileInfo()
+  //     ])
+  //        .then((result ) => {
+  //          if(result) {
+  //           const [cardData, userData] = result;
+  //           setCurrentUser(userData);
+  //           setCards(cardData);
+  //           setLoggedIn(true);
+  //           history.push('/');
             
-         })
-          .catch((err) => {
-              console.log(err)
-          })
+  //          }
+            
+  //        })
+  //         .catch((err) => {
+  //             console.log(err)
+  //         })
       
-  }, [history])
+  // }, [history, loggedIn])
 
   //   React.useEffect( () => {
   //     if (loggedIn) {
