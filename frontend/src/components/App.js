@@ -239,9 +239,9 @@ function App() {
             isMenuCloseIcon={isMenuCloseIcon ? 'header_opened' : 'header_closed'}
             />
             <Switch>
-            <ProtectedRoute 
+            <ProtectedRoute exact path="/main"
         component = {Main}
-        loggedIn = {loggedIn ? <Redirect to="/main" /> : <Redirect to="/signin" />}
+        loggedIn = {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
         cards = {cards}
         onEditAvatar={handleEditAvatarClick} 
         onEditProfile={handleEditProfileClick}  
