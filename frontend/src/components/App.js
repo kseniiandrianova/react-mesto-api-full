@@ -162,16 +162,15 @@ function App() {
     }
     const handleCheckToken = () => {
       const jwt = localStorage.getItem('jwt');
-      console.log(jwt);
       if (!jwt) {
         auth.getContent(jwt)
         .then((res) => {
           if(res) {
             const email = res.data.email;
-            setLoggedIn(true);
             setInitialData({
               email
            });
+            setLoggedIn(true);
             history.push('/main');
           }
             
@@ -186,10 +185,12 @@ function App() {
 
     const handleRegSubmit = ( email, password ) => {
       return auth.register(email, password)
-      .then(() => {
+      .then((res) => {
+        if(res) {
+          history.push('/signin');
           setInfoTooltipOpen(true);
           setLoggedIn(true);
-          history.push('/signin');
+        } 
       })
       .catch((err) => {
         console.log(err);
@@ -255,7 +256,7 @@ function App() {
           <Route path="/signin">
             <Login  onSubmit={handleLogSubmit} />
           </Route>
-          <Route path="/">
+          <Route path="/main">
                 {loggedIn ? <Redirect to="/main" /> : <Redirect to="/signin" />}
               </Route>
         </Switch>
