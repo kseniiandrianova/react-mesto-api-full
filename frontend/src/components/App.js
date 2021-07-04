@@ -42,7 +42,10 @@ function App() {
 
     React.useEffect(() => {
       if(loggedIn){
-       api.getInitalCards()
+        Promise.all([
+          api.getInitalCards(),
+          api.getProfileInfo()
+      ])
         .then((cardData) => {
            setCards(cardData);
         })
@@ -57,7 +60,8 @@ function App() {
         })
     }, [history, loggedIn]);
 
- 
+  
+
   function handleMenuClick() {
     setMenuOpened(true);
     setMenuIconOpen(true);
