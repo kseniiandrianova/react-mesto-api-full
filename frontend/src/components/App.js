@@ -42,72 +42,22 @@ function App() {
 
     React.useEffect(() => {
       if(loggedIn){
-       // запрос за карточками
        api.getInitalCards()
         .then((cardData) => {
-           // установили стейт с ними
            setCards(cardData);
         })
       }
     }, [loggedIn]);
     React.useEffect(() => {
-     // запрос за профилем
      api.getProfileInfo()
         .then(userData => {
           setCurrentUser(userData);
           setLoggedIn(true);
-          // установили стейт, что залогинились
-          // установили прочие данные
-          // и ушли на главную
           history.push('/');
         })
     }, [history, loggedIn]);
 
-  //   React.useEffect( () => {
-  //       Promise.all([
-  //         api.getInitalCards(),
-  //         api.getProfileInfo()
-  //     ])
-  //        .then((result ) => {
-  //          if(result) {
-  //           const [cardData, userData] = result;
-  //           setCurrentUser(userData);
-  //           setCards(cardData);
-  //           setLoggedIn(true);
-  //           history.push('/');
-            
-  //          }
-            
-  //        })
-  //         .catch((err) => {
-  //             console.log(err)
-  //         })
-      
-  // }, [history, loggedIn])
-
-  //   React.useEffect( () => {
-  //     if (loggedIn) {
-  //       Promise.all([
-  //         api.getInitalCards(),
-  //         api.getProfileInfo(),
-  //     ])
-  //     .then((result ) => {
-  //       const [cardData, userData] = result;
-  //       cardData.reverse();
-  //       setCurrentUser(userData);
-  //       setCards(cardData);
-  //       setLoggedIn(true);
-  //       history.push('/');
-  //      })
-  //       .catch((err) => {
-  //           console.log(err)
-  //       })
-  //    }
-  //    // eslint-disable-next-line react-hooks/exhaustive-deps
-  //  }, [loggedIn]);
-
-  
-
+ 
   function handleMenuClick() {
     setMenuOpened(true);
     setMenuIconOpen(true);
