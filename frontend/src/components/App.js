@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, useHistory, Redirect} from 'react-router-dom';
+import { Switch, Route, useHistory} from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
 import Header from './Header';
@@ -41,7 +41,7 @@ function App() {
     const history = useHistory();
 
     React.useEffect( () => {
-      if (loggedIn) {
+      
         Promise.all([
           api.getInitalCards(),
           api.getProfileInfo(),
@@ -52,15 +52,19 @@ function App() {
         cardData.reverse();
         setCurrentUser(userData);
         setCards(cardData);
-        handleCheckToken();
+       
        })
         .catch((err) => {
             console.log(err)
         })
-     }
+     
      // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [loggedIn]);
+   }, []);
 
+   React.useEffect(() => {
+    handleCheckToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   
 
@@ -238,7 +242,7 @@ function App() {
             <Switch>
             <ProtectedRoute exact path="/"
         component = {Main}
-        loggedIn = {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
+        loggedIn = {loggedIn}
         cards = {cards}
         onEditAvatar={handleEditAvatarClick} 
         onEditProfile={handleEditProfileClick}  
