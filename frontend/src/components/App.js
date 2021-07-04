@@ -52,7 +52,7 @@ function App() {
         cardData.reverse();
         setCurrentUser(userData);
         setCards(cardData);
-        
+        handleCheckToken();
        })
         .catch((err) => {
             console.log(err)
@@ -61,10 +61,7 @@ function App() {
      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [loggedIn]);
 
-   React.useEffect(() => {
-    handleCheckToken();
-     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+
   
 
   function handleMenuClick() {
