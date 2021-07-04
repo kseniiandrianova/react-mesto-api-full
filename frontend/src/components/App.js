@@ -52,7 +52,7 @@ function App() {
         cardData.reverse();
         setCurrentUser(userData);
         setCards(cardData);
-        handleCheckToken();
+        
        })
         .catch((err) => {
             console.log(err)
@@ -61,12 +61,6 @@ function App() {
      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [loggedIn]);
 
-   React.useEffect(() => {
-    handleCheckToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  
 
   function handleMenuClick() {
     setMenuOpened(true);
@@ -161,26 +155,26 @@ function App() {
         console.log(err)
       })
     }
-    const handleCheckToken = () => {
-      const jwt = localStorage.getItem('jwt');
-      if (!jwt) {
-        auth.getContent(jwt)
-        .then((res) => {
-          if(res) {
-            const email = res.data.email;
-            setInitialData({
-              email
-           });
-            setLoggedIn(true);
-            history.push('/');
-          }
+    // const handleCheckToken = () => {
+    //   const jwt = localStorage.getItem('jwt');
+    //   if (!jwt) {
+    //     auth.getContent(jwt)
+    //     .then((res) => {
+    //       if(res) {
+    //         const email = res.data.email;
+    //         setInitialData({
+    //           email
+    //        });
+    //         setLoggedIn(true);
+    //         history.push('/');
+    //       }
             
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    }
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //       });
+    //   }
+    // }
 
 
 
@@ -211,7 +205,7 @@ function App() {
              password
             
           });
-          handleCheckToken();
+          
           history.push('/');
         })
         .catch((err) => {
