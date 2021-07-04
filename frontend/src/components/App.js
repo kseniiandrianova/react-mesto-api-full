@@ -171,7 +171,7 @@ function App() {
               email
            });
             setLoggedIn(true);
-            history.push('/main');
+            history.push('/');
           }
             
           })
@@ -211,7 +211,7 @@ function App() {
             
           });
           handleCheckToken();
-          history.push('/main');
+          history.push('/');
         })
         .catch((err) => {
           console.log(err);
@@ -239,7 +239,7 @@ function App() {
             isMenuCloseIcon={isMenuCloseIcon ? 'header_opened' : 'header_closed'}
             />
             <Switch>
-            <ProtectedRoute exact path="/main"
+            <ProtectedRoute exact path="/"
         component = {Main}
         loggedIn = {loggedIn}
         cards = {cards}
