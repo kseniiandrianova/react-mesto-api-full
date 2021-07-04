@@ -49,6 +49,7 @@ function App() {
       .then((result ) => {
         const [cardData, userData] = result;
         console.log(result);
+        setLoggedIn(true);
         cardData.reverse();
         setCurrentUser(userData);
         setCards(cardData);
