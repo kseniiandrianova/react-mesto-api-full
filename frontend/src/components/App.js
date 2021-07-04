@@ -41,7 +41,8 @@ function App() {
     const history = useHistory();
 
     React.useEffect( () => {
-      Promise.all([
+      if(loggedIn) {
+        Promise.all([
           api.getInitalCards(),
           api.getProfileInfo()
       ])
@@ -55,7 +56,9 @@ function App() {
           .catch((err) => {
               console.log(err)
           })
-  }, [history])
+      }
+      
+  }, [history, loggedIn])
 
   //   React.useEffect( () => {
   //     if (loggedIn) {
@@ -180,7 +183,6 @@ function App() {
         if(res) {
           history.push('/signin');
           setInfoTooltipOpen(true);
-          setLoggedIn(true);
         } 
       })
       .catch((err) => {
