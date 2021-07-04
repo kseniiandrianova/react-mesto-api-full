@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, useHistory} from 'react-router-dom';
+import { Switch, Route, useHistory, Redirect} from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
 import Header from './Header';
@@ -242,7 +242,7 @@ function App() {
             <Switch>
             <ProtectedRoute exact path="/"
         component = {Main}
-        loggedIn = {loggedIn}
+        loggedIn = {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
         cards = {cards}
         onEditAvatar={handleEditAvatarClick} 
         onEditProfile={handleEditProfileClick}  
@@ -257,6 +257,7 @@ function App() {
           <Route path="/signin">
             <Login  onSubmit={handleLogSubmit} />
           </Route>
+         
         </Switch>
         
             <EditProfilePopup 
