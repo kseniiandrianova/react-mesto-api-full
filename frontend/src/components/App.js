@@ -199,12 +199,13 @@ function App() {
       return auth.authorize({email, password})
       .then((res) => {
         if(res) {
-                  const email = res.data.email;
-                 setInitialData({
-                   email
-                 });
-                  setLoggedIn(true);
-                 history.push('/');
+          setLoggedIn(true);
+          setInitialData({
+             email,
+             password
+            
+          });
+           history.push('/');
               }
         })
         .catch((err) => {
