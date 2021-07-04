@@ -156,9 +156,6 @@ function App() {
       })
     }
 
-
-
-
     const handleRegSubmit = ( email, password ) => {
       return auth.register(email, password)
       .then((res) => {
@@ -180,14 +177,14 @@ function App() {
       return auth.authorize({email, password})
       .then((res) => {
         if(res) {
-          localStorage.setItem('jwt', res.token);
+          history.push('/');
           setLoggedIn(true);
           setInitialData({
              email,
              password
             
           });
-          history.push('/');
+         
         }
        
         })
