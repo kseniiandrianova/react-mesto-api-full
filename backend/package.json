@@ -3,14 +3,12 @@
   "version": "1.0.0",
   "description": "сервер для проекта mesto",
   "main": "./app.js",
-  "author": "Nikita Dannik",
   "scripts": {
     "lint": "npx eslint . --ext .js",
     "start": "node app.js",
     "build": "react-scripts build",
     "dev": "nodemon app.js"
   },
-  "homepage": "https://github.com/kseniiandrianova/express-mesto/",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
@@ -30,14 +28,5 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.2",
     "nodemon": "^2.0.7"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kseniiandrianova/express-mesto.git"
-  },
-  "keywords": [],
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kseniiandrianova/express-mesto/issues"
   }
 }
